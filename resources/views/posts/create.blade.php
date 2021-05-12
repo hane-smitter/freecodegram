@@ -23,7 +23,7 @@
                 @error('image')
                 <strong>{{ $message }}</strong>
                 @enderror
-                <button class="btn btn-primary mt-4 d-block" type="submit">submit</button>
+                <button class="btn btn-primary mt-4 d-block" type="submit">post</button>
 
             </div>
         </div>

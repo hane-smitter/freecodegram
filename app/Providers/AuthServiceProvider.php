@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Profile::class => ProfilePolicy::class,
+        // Profile::class => ProfilePolicy::class,
     ];
 
     /**
@@ -28,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update', [ProfilePolicy::class, 'update']);
+        Gate::define('viewFollowBtn', [ProfilePolicy::class, 'viewFollowBtn']);
     }
 }

@@ -1,5 +1,7 @@
 <?php
+namespace App\Http\Controllers;
 
+use App\Mail\NewUserWelcomeMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,15 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.show');
-Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update']);
-Route::get('/p/create', [App\Http\Controllers\PostsController::class, 'create']);
-Route::get('/p/{post}', [App\Http\Controllers\PostsController::class, 'show']);
-Route::post('/p', [App\Http\Controllers\PostsController::class, 'store']);
+Route::get('/email', function() {
+    return new NewUserWelcomeMail();
+});
+Route::post('/follow/{user}', [FollowsController::class, 'store']);
+
+Route::get('/profile/{user}', [ProfileController::class, 'index'])->name('profile.show');
+Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile/{user}', [ProfileController::class, 'update']);
+
+Route::get('/', [PostsController::class, 'index']);
+Route::get('/p/create', [PostsController::class, 'create']);
+Route::get('/p/{post}', [PostsController::class, 'show']);
+Route::post('/p', [PostsController::class, 'store']);

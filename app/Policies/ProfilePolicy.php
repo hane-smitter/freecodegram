@@ -29,9 +29,9 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return mixed
      */
-    public function view(User $user, Profile $profile)
+    public function viewFollowBtn(User $user, Profile $profile)
     {
-        return $user->id == $profile->user_id;
+        return $user->id != $profile->user_id;
     }
 
     /**
